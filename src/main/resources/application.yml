@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: learn-tracker
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/learn_tracker
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+    
+  jpa:
+    hibernate:
+      ddl-auto: none
+    defer-datasource-initialization: false
+    
+  sql:
+    init:
+      mode: never
+      
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+    
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+jwt:
+  secret: learn-tracker-secret-key-change-in-production
+  expire-time: 86400000  # 24小时
+  header: Authorization
+  token-prefix: Bearer
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
